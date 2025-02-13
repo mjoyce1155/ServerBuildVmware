@@ -1,0 +1,2 @@
+# ServerBuildVmware
+ServerBuildVmware using templates
