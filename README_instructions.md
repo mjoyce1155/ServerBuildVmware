@@ -105,3 +105,29 @@ This section orchestrates the deployment process:
   ```powershell
   git clone https://github.com/mjoyce1155/ServerBuildVmware.git
   cd ServerBuildVmware
+
+  ### 2. Modules
+
+- **Modules Install**:
+  ```powershell
+  Here are the commands you need to run in a new PowerShell terminal to install and load the required modules for DeployVMFromTemplate.ps1, including VMware PowerCLI, 
+  powershell-yaml, and the custom InitializePowerCli.psm1 module, presented in Markdown format:
+  # Commands to Install and Load Modules in a New PowerShell Terminal
+
+Below are the commands to set up the necessary modules for running `DeployVMFromTemplate.ps1`. Execute these in a fresh PowerShell terminal.
+
+1. **Install VMware PowerCLI Module**:
+   ```powershell
+   Install-Module -Name VMware.PowerCLI -Scope CurrentUser -Force
+
+2. **Install powershell-yaml Module**:
+  ```powershell
+  Install-Module -Name powershell-yaml -Scope CurrentUser -Force
+
+
+3. **Load Custom InitializePowerCli.psm1 Module:**:
+  ```powershell
+  Import-Module "C:\vscode\ServerBuildVmware\Module\InitializePowerCli.psm1" -Verbose
+
+
+  
