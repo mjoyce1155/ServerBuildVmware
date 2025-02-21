@@ -1,11 +1,28 @@
+# serverlist.yaml
+#
+# Purpose: Defines the configuration for deploying virtual machines in VMware vSphere using DeployVMFromTemplate.ps1.
+# Usage: This file is consumed by DeployVMFromTemplate.ps1 to specify VM details (e.g., name, host, network) and 
+#        domain settings (e.g., name, timezone). Edit this file to customize VM deployments, then run:
+#        PS> $cred = Get-Credential
+#        PS> .\DeployVMFromTemplate.ps1 -ConfigPath "C:\path\to\serverlist.yaml" -Credential $cred
+# Author: mjoyce1155
+# Last Updated: February 21, 2025
+# Repository: https://github.com/mjoyce1155/ServerBuildVmware
+# Note: Ensure all required fields are present as shown below to avoid deployment errors.
+
+# Section: vms - Array of virtual machines to deploy
+
+
+
+
 vms:
   - name: TestServer1139
-    vcenter: vcenter01.cityofdenton.com
-    host: esxi37.cityofdenton.com
-    datastore: Pure-Datastore-04
-    template: Template_2019
+    vcenter: vcenter01.com
+    host: esxi.com
+    datastore: PureDatastore
+    template: Template
     folder: Pre-Production Servers
-    network: VMNet2057
+    network: VMNet
     ip: 10.20.57.220
     subnet: 255.255.255.0
     gateway: 10.20.57.1
@@ -14,12 +31,12 @@ vms:
       - 10.0.1.52
     spec_name: CustomSpec_Test2231_Verbose
   - name: TestServer1140
-    vcenter: vcenter01.cityofdenton.com
-    host: esxi37.cityofdenton.com
+    vcenter: vcenter01.com
+    host: esxi.com
     datastore: Pure-Datastore-05
     template: w2022Std
     folder: Pre-Production Servers
-    network: VMNet2057
+    network: VMNet
     ip: 10.20.57.221
     subnet: 255.255.255.0
     gateway: 10.20.57.1
@@ -28,7 +45,7 @@ vms:
       - 10.0.1.52
     spec_name: CustomSpec_Test2230_Verbose
 domain:
-  name: Codad.cityofdenton.com
+  name: Codad.com
   timezone: "020"
   admin_name: "Administrator"
   org_name: "CODAD"
