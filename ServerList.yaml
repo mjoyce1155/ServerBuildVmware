@@ -1,0 +1,34 @@
+vms:
+  - name: TestServer1139
+    vcenter: vcenter01.cityofdenton.com
+    host: esxi37.cityofdenton.com
+    datastore: Pure-Datastore-04
+    template: Template_2019
+    folder: Pre-Production Servers
+    network: VMNet2057
+    ip: 10.20.57.220
+    subnet: 255.255.255.0
+    gateway: 10.20.57.1
+    dns:
+      - 10.0.1.50
+      - 10.0.1.52
+    spec_name: CustomSpec_Test2231_Verbose
+  - name: TestServer1140
+    vcenter: vcenter01.cityofdenton.com
+    host: esxi37.cityofdenton.com
+    datastore: Pure-Datastore-05
+    template: w2022Std
+    folder: Pre-Production Servers
+    network: VMNet2057
+    ip: 10.20.57.221
+    subnet: 255.255.255.0
+    gateway: 10.20.57.1
+    dns:
+      - 10.0.1.50
+      - 10.0.1.52
+    spec_name: CustomSpec_Test2230_Verbose
+domain:
+  name: Codad.cityofdenton.com
+  timezone: "020"
+  admin_name: "Administrator"
+  org_name: "CODAD"

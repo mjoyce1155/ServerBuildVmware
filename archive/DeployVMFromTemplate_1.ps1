@@ -37,24 +37,23 @@ Start-Sleep -Seconds 120
 $newVM = Get-VM -Name $newVMName  
 
 # # # Configure the VM's network adapter to connect to the specified distributed port group
-# Get-NetworkAdapter -VM $newVM | Set-NetworkAdapter -Portgroup $portgroupName -Confirm:$false
+Get-NetworkAdapter -VM $newVM | Set-NetworkAdapter -Portgroup $portgroupName -Confirm:$false
 
 # # # Power off the VM before customization
-# Stop-VM -VM $newVM -Confirm:$false -Force
+Stop-VM -VM $newVM -Confirm:$false -Force
 
 # # # Create the customization spec with KMS client settings (no product key, no license mode)
-# $spec = New-OSCustomizationSpec -Name "CustomSpec1" -OSType Windows -FullName "Administrator" -OrgName "CityOfDenton" -TimeZone 035 -AdminPassword (ConvertTo-SecureString "v1Rtu@lize" -AsPlainText -Force) -Domain $domainName -DomainUsername $domainCred.UserName -DomainPassword $domainCred.Password
+$spec = New-OSCustomizationSpec -Name "CustomSpec1" -OSType Windows -FullName "Administrator" -OrgName "CityOfDenton" -TimeZone 035 -AdminPassword (ConvertTo-SecureString "v1Rtu@lize" -AsPlainText -Force) -Domain $domainName -DomainUsername $domainCred.UserName -DomainPassword $domainCred.Password
 
 # # # Modify the ChangeSID property to True
-# Set-OSCustomizationSpec -OSCustomizationSpec $spec -ChangeSID $true
+Set-OSCustomizationSpec -OSCustomizationSpec $spec -ChangeSID $true
 
 # # Validate if the customization spec was created
 
 # # Power on the VM after customization
-# Start-VM -VM $newVM
+Start-VM -VM $newVM
 
 # Configure network settings inside the guest OS
-# Configure network settings inside the guest OS  
 $networkConfigScript = @"  
 \$adapter = Get-NetAdapter | Where-Object { \$_.Name -like "*Ethernet*" }  
 if (\$adapter) {  
@@ -86,12 +85,12 @@ Add-Computer -DomainName \$domainName -Credential \$credential -Restart
 Invoke-VMScript -VM $newVM -ScriptText $domainJoinScript -GuestCredential $guestCred  
 
 
-Write-Host "Domain Name: $domainName"
-Write-Host "Domain Username: $domainUsername"
-Write-Host "Domain Password: $domainPassword"  # (Be cautious printing passwords in production)
-write-host "guestcredentials: $guestcredentials"
-write-host "guestcredentials: $guestUsername"
-write-host "guestcredentials: $guestPassword"
+Write-Object "Domain Name: $domainName"
+Write-Object "Domain Username: $domainUsername"
+Write-Object "Domain Password: $domainPassword"  # (Be cautious printing passwords in production)
+Write-Object "guestcredentials: $guestcredentials"
+Write-Object "guestcredentials: $guestUsername"
+Write-Object "guestcredentials: $guestPassword"
 
 
 

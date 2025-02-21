@@ -1,0 +1,50 @@
+---
+driver:
+  name: vcenter
+  vcenter_host: "vcenter.example.com"
+  username: "administrator@vsphere.local"
+  password: "your_vcenter_password"
+  datacenter: "MyDatacenter"
+  cluster: "MyCluster"
+  template: "Windows2019Template"
+  folder: "/Datacenters/MyDatacenter/vm/YourFolder"
+  resource_pool: "YourResourcePool"
+  network: "YourNetworkName"
+  # Inline customization specification with full options:
+  customization_spec:
+    identity:
+      hostname: "my-vm"
+      domain: "example.com"
+    global_ip_settings:
+      dns_servers:
+        - "8.8.8.8"
+        - "8.8.4.4"
+      dns_suffix: "example.com"
+    nic_settings:
+      - adapter: "Network adapter 1"      # Identifier for the NIC (if needed)
+        type: "static"                    # Use "dhcp" if you prefer dynamic addressing
+        ip_address: "192.168.1.10"
+        subnet_mask: "255.255.255.0"
+        gateway: "192.168.1.1"
+        dns_servers:
+          - "8.8.8.8"
+          - "8.8.4.4"
+    windows:
+      time_zone: "Pacific Standard Time"
+      admin_password: "YourPasswordHere"
+
+provisioner:
+  name: shell
+  # Downloads and executes a script from your internal website.
+  command: >
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'http://internal.example.com/scripts/BootScript_ConfigureOS.ps1' -OutFile 'C:\init\BootScript_ConfigureOS.ps1'; & 'C:\init\BootScript_ConfigureOS.ps1'"
+
+platforms:
+  - name: windows-2019
+    driver:
+      # Additional platform-specific driver settings if needed.
+
+suites:
+  - name: default
+    run_list: []    # Not using Chef so this remains empty.
+    attributes: {}  # No node attributes required.
