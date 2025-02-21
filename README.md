@@ -1,3 +1,4 @@
+```mermaid
 graph TD
     A[Start] --> B[Set $VerbosePreference = 'Continue']
     B --> C[Import InitializePowerCli.psm1]
